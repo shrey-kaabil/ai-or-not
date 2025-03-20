@@ -5,9 +5,372 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f7fa;
+  color: #333;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Global Styles */
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  cursor: pointer;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Lobby Styles */
+.lobby-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.lobby-container h1 {
+  font-size: 3rem;
+  margin-bottom: 30px;
+  color: #2a3f5f;
+}
+
+.stats-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2a3f5f;
+}
+
+.find-match-button {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 1.2rem;
+  padding: 12px 30px;
+}
+
+.find-match-button:hover:not(:disabled) {
+  background-color: #3e8e41;
+}
+
+/* Match Styles */
+.match-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.match-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.timer {
+  font-size: 0.9rem;
+  font-weight: 600;
+  background-color: #f1f1f1;
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: #555;
+}
+
+.timer.warning {
+  background-color: #ffecb5;
+  color: #e67700;
+  animation: pulse 1s infinite;
+}
+
+.guess-indicator {
+  background-color: #e3f2fd;
+  color: #0277bd;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border-left: 3px solid #0277bd;
+}
+
+.guess-notice {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 10px 0;
+  color: #495057;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.message-counter {
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.guess-button {
+  background-color: #2196F3;
+  color: white;
+}
+
+.guess-button:hover:not(:disabled) {
+  background-color: #0b7dda;
+}
+
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.message {
+  max-width: 70%;
+  padding: 10px 15px;
+  border-radius: 18px;
+  position: relative;
+}
+
+.message.sent {
+  align-self: flex-end;
+  background-color: #dcf8c6;
+  margin-left: 50px;
+}
+
+.message.received {
+  align-self: flex-start;
+  background-color: white;
+  margin-right: 50px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.message-sender {
+  font-weight: bold;
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+}
+
+.message-text {
+  word-break: break-word;
+}
+
+.message-time {
+  text-align: right;
+  font-size: 0.7rem;
+  color: #999;
+  margin-top: 5px;
+}
+
+.message-input-container {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.05);
+  padding: 15px;
+}
+
+.message-input {
+  resize: none;
+  min-height: 100px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  font-family: inherit;
+  margin-bottom: 10px;
+}
+
+.char-count {
+  text-align: right;
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.send-button {
+  align-self: flex-end;
+  background-color: #4CAF50;
+  color: white;
+}
+
+.send-button:hover:not(:disabled) {
+  background-color: #3e8e41;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.guess-options {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.guess-options button {
+  padding: 15px 25px;
+  font-size: 1.1rem;
+}
+
+.guess-options button:first-child {
+  background-color: #ff9800;
+  color: white;
+}
+
+.guess-options button:last-child {
+  background-color: #2196F3;
+  color: white;
+}
+
+.close-modal {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Results Styles */
+.results-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.results-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-top: 20px;
+}
+
+.match-info {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.reveal-section, .guess-section, .score-section {
+  margin-bottom: 25px;
+}
+
+.opponent-type, .guess {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.opponent-type.human, .guess.human {
+  color: #ff9800;
+}
+
+.opponent-type.ai, .guess.ai {
+  color: #2196F3;
+}
+
+.guess-result {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.stars {
+  font-size: 2rem;
+  margin: 15px 0;
+}
+
+.score-value {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.actions {
+  margin-top: 30px;
+}
+
+.play-again-button {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 1.2rem;
+  padding: 12px 30px;
+}
+
+.play-again-button:hover {
+  background-color: #3e8e41;
 }
