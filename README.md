@@ -1,46 +1,135 @@
-# Getting Started with Create React App
+# AI or Not - Frontend Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based frontend for the AI or Not game where players try to determine if they're chatting with a human or AI.
+
+## Tech Stack
+
+- React 18 with TypeScript
+- Socket.io-client for real-time communication
+- Supabase for authentication and data storage
+- Tailwind CSS for styling
+- React Router for navigation
+
+## Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+- Backend server running (see server README)
+- Supabase account and credentials
+
+## Project Structure
+
+```
+ai-or-not/
+├── public/          # Static files
+├── src/
+│   ├── components/  # Reusable UI components
+│   ├── pages/       # Page components
+│   ├── services/    # API & socket services
+│   ├── utils/       # Utility functions
+│   ├── types/       # TypeScript type definitions
+│   └── App.tsx      # Root component
+├── package.json
+└── .env
+```
+
+## Installation
+
+1. Clone the repository (if you haven't already):
+   ```bash
+   git clone <repository-url>
+   cd ai-or-not
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
+   - Copy `.env.example` to `.env`
+   ```bash
+   cp .env.example .env
+   ```
+   - Update the following variables in `.env`:
+     ```
+     REACT_APP_API_URL=http://localhost:5000
+     REACT_APP_SUPABASE_URL=your_supabase_url
+     REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
+     ```
+
+## Running the Application
+
+### Development Mode
+```bash
+npm start
+```
+This will start the development server at http://localhost:3000
+
+### Production Build
+```bash
+npm run build
+```
+The build artifacts will be stored in the `build/` directory.
+
+## Game Features
+
+- Real-time chat with matched players
+- Turn-based messaging system (3 messages per player)
+- Identity guessing system
+- Score tracking based on guess timing
+- Match history and statistics
 
 ## Available Scripts
 
-In the project directory, you can run:
+- `npm start` - Run development server
+- `npm test` - Run tests
+- `npm run build` - Create production build
+- `npm run eject` - Eject from Create React App
 
-### `npm start`
+## Component Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Core Components
+- `GameRoom` - Main game interface
+- `Chat` - Message display and input
+- `MatchMaking` - Queue and player matching
+- `GuessPanel` - Identity guessing interface
+- `ScoreBoard` - Display game results
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Utility Components
+- `Loading` - Loading states
+- `ErrorBoundary` - Error handling
+- `Toast` - Notifications
+- `Modal` - Popup dialogs
 
-### `npm test`
+## State Management
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The application uses React's Context API for:
+- Game state
+- User authentication
+- WebSocket connection
+- Theme preferences
 
-### `npm run build`
+## Contributing
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Create a feature branch
+2. Make your changes
+3. Run tests
+4. Submit a pull request
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Known Issues
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Occasional WebSocket reconnection needed
+- Mobile responsiveness improvements needed
+- Performance optimization for chat history
 
-### `npm run eject`
+## Browser Support
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## License
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+MIT License - see LICENSE file for details
